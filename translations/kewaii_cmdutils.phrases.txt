@@ -1,0 +1,32 @@
+"Phrases"
+{
+  "RedColor"
+  {
+    "#format" "{1:s}"
+    "en" "O jogador{red} {1}{green} foi colorido de {red}Vermelho!"
+	"pt" "{red}{1}{green} was colored with {red}Red{green}!"
+  }
+  "BlueColor"
+  {
+    "#format" "{1:s}"
+    "en" "O jogador{red} {1}{green} foi colorido de {blue}Azul!"
+	"pt" "{red}{1}{green} was colored with {blue}Blue{green}!"
+  }
+  "RGBColor"
+  {
+    "#format" "{1:s}, {2:i}, {3:i}, {4:i}"
+    "en" "O jogador{red} {1}{green} foi colorido com o código RGB {red}{2}, {3}, {4}{green}!"
+	"pt" "{red}{1}{green} was colored with RGB code {red}{2}, {3}, {4}{green}!"
+  }
+  "UnrecognizedColor"
+  {
+	"en"	"Cor não reconhecida"
+	"pt"	"Unrecognized Color"
+  }
+  "TargetDead"
+  {
+	"en"	"O alvo selecionado está morto"
+	"pt"	"Selected target is dead"
+  }
+  
+}
