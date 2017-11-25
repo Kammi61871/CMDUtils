@@ -5,7 +5,7 @@
 
 #define PLUGIN_DESCRIPTION 	"Many commands to help in server moderation."
 #define PLUGIN_AUTHOR 		"Kewaii"
-#define PLUGIN_VERSION 		"1.3.2"
+#define PLUGIN_VERSION 		"1.3.3"
 #define PLUGIN_TAG			"{pink}	[CMDUtils by Kewaii]{green}"
 #define PLUGIN_NAME      "CMDUtils"
 
@@ -18,22 +18,26 @@ public Plugin myinfo = {
 };
 
 bool g_bHudsayEnabled;
-Handle g_cvarHudsayEnabled;
+ConVar g_cvarHudsayEnabled;
 bool g_bColorifyEnabled;
-Handle g_cvarColorifyEnabled;
+ConVar g_cvarColorifyEnabled;
+
+ConVar g_cvarHudsayChannel;
+int g_iChannel;
 
 public void OnPluginStart() {
 	RegAdminCmd("sm_hudsay", Command_HUDSay, ADMFLAG_KICK, "replacement to msay without being annoying");
 	RegAdminCmd("sm_bc", Command_Colorify, ADMFLAG_KICK, "colorifies the player");
 	g_cvarHudsayEnabled = CreateConVar("kewaii_cmdutils_hudsay_enabled", "1", "Is !hudsay Comamnd enabled? 1 = true 0 = false", _, true, 0.0, true, 1.0);
 	g_cvarColorifyEnabled = CreateConVar("kewaii_cmdutils_colorify_enabled", "1", "Is !bc Command enabled? 1 = true 0 = false", _, true, 0.0, true, 1.0);
+	g_cvarHudsayChannel = CreateConVar("kewaii_cmdutils_hudsay_channel", "1", "Hudsay channel to prevent overriding from other plugins");
 	LoadTranslations("kewaii_cmdutils.phrases");
 	AutoExecConfig(true, "kewaii_cmdutils");
 }
 
 public Action Command_HUDSay(int client, int args)
 {
-
+	g_iChannel = GetConVarInt(g_cvarHudsayChannel);	
 	g_bHudsayEnabled = GetConVarBool(g_cvarHudsayEnabled);
 	if (g_bHudsayEnabled)
 	{
@@ -51,7 +55,7 @@ public Action Command_HUDSay(int client, int args)
 					char arg1[512];
 					GetCmdArgString(arg1, sizeof(arg1));
 					SetHudTextParams(0.1, -1.0, 5.0, 255, 0, 0, 255, 0, 0.1, 0.1, 0.1);			
-					ShowHudText(i, 5, arg1);
+					ShowHudText(i, g_iChannel, arg1);
 				}
 			}
 		}		
